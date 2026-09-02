@@ -252,3 +252,38 @@ function consultarMovimientos() {
 
     alert(historial);
 }
+// Menu de inicio
+
+function menuInicio() {
+
+    let opcion = "";
+
+    while (opcion != "3") {
+
+        opcion = prompt(
+            "=== SISTEMA BANCARIO MI PLATA ===\n\n" +
+            "1. Iniciar\n" +
+            "2. Registrar\n" +
+            "3. Salir\n\n" +
+            "Elija una opción:"
+        );
+
+        if (opcion == "1") {
+
+            iniciarSesion();
+
+        } else if (opcion == "2") {
+
+            registrar();
+
+        } else if (opcion == "3") {
+
+            alert("Gracias por utilizar Mi Plata.");
+
+        } else {
+
+            alert("Opción no válida.");
+        }
+    }
+}
+menuInicio();
