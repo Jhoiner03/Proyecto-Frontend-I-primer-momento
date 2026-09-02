@@ -62,3 +62,52 @@ function registrar() {
 
     alert("Usuario registrado correctamente.");
 }
+// Inicio de sesion
+
+function iniciarSesion() {
+
+    if (usuarioRegistrado == false) {
+
+        alert("No hay ningún usuario registrado.");
+
+        return;
+    }
+
+    let intentos = 0;
+    let ingresoCorrecto = false;
+
+    while (intentos < 3 && ingresoCorrecto == false) {
+
+        let nombre = prompt("Ingrese su nombre de usuario:");
+        let clave = prompt("Ingrese su clave:");
+
+        if (nombre == nombreUsuario && clave == claveUsuario) {
+
+            ingresoCorrecto = true;
+
+            alert("Inicio de sesión exitoso.");
+
+            menuPrincipal();
+
+        } else {
+
+            intentos = intentos + 1;
+
+            if (intentos < 3) {
+
+                alert(
+                    "Usuario o clave incorrectos.\n" +
+                    "Intentos utilizados: " + intentos +
+                    "\nIntentos restantes: " + (3 - intentos)
+                );
+
+            } else {
+
+                alert(
+                    "Cuenta bloqueada por 24 horas, " +
+                    "comunícate con tu banco"
+                );
+            }
+        }
+    }
+}
