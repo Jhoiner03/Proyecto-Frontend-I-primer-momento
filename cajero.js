@@ -111,3 +111,144 @@ function iniciarSesion() {
         }
     }
 }
+// Menu principal
+
+function menuPrincipal() {
+
+    let opcion = "";
+
+    while (opcion != "5") {
+
+        opcion = prompt(
+            "=== MI PLATA ===\n\n" +
+            "1. Retirar Dinero\n" +
+            "2. Consultar Saldo\n" +
+            "3. Consignar Dinero\n" +
+            "4. Consultar Movimientos\n" +
+            "5. Salir\n\n" +
+            "Elija una opción:"
+        );
+
+        if (opcion == "1") {
+
+            retirarDinero();
+
+        } else if (opcion == "2") {
+
+            consultarSaldo();
+
+        } else if (opcion == "3") {
+
+            consignarDinero();
+
+        } else if (opcion == "4") {
+
+            consultarMovimientos();
+
+        } else if (opcion == "5") {
+
+            alert("Sesión finalizada.");
+
+        } else {
+
+            alert("Opción no válida.");
+        }
+    }
+}
+
+// Retirar dinero
+
+function retirarDinero() {
+
+    let monto = prompt("Ingrese el monto que desea retirar:");
+
+    monto = Number(monto);
+
+    if (isNaN(monto) || monto <= 0) {
+
+        alert("Ingrese un monto válido.");
+
+        return;
+    }
+
+    if (monto > saldoUsuario) {
+
+        alert("No puede retirar más dinero del saldo actual.");
+
+        return;
+    }
+
+    saldoUsuario = saldoUsuario - monto;
+
+    // Guardar el movimiento en los arreglos
+
+    fechasMovimientos.push(new Date().toLocaleString());
+    tiposMovimientos.push("Retiro");
+    montosMovimientos.push(monto);
+
+    alert(
+        "Retiro realizado correctamente.\n" +
+        "Nuevo saldo: $" + saldoUsuario
+    );
+}
+
+// Verificar saldo
+
+function consultarSaldo() {
+
+    alert("Su saldo actual es: $" + saldoUsuario);
+}
+
+// Consignar dinero
+
+function consignarDinero() {
+
+    let monto = prompt("Ingrese el monto que desea consignar:");
+
+    monto = Number(monto);
+
+    if (isNaN(monto) || monto <= 0) {
+
+        alert("El monto a consignar debe ser un número positivo.");
+
+        return;
+    }
+
+    saldoUsuario = saldoUsuario + monto;
+
+    // Guardar el movimiento en los arreglos
+
+    fechasMovimientos.push(new Date().toLocaleString());
+    tiposMovimientos.push("Consignación");
+    montosMovimientos.push(monto);
+
+    alert(
+        "Consignación realizada correctamente.\n" +
+        "Nuevo saldo: $" + saldoUsuario
+    );
+}
+
+// movimientos realizados
+
+function consultarMovimientos() {
+
+    if (tiposMovimientos.length == 0) {
+
+        alert("No tiene movimientos registrados.");
+
+        return;
+    }
+
+    let historial = "=== MOVIMIENTOS ===\n\n";
+
+    for (let i = 0; i < tiposMovimientos.length; i++) {
+
+        historial =
+            historial +
+            "Fecha: " + fechasMovimientos[i] + "\n" +
+            "Tipo: " + tiposMovimientos[i] + "\n" +
+            "Monto: $" + montosMovimientos[i] + "\n\n";
+    }
+
+    alert(historial);
+}
